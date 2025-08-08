@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Landing Page</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <nav id="navbar" role="navigation" aria-label="Main Navigation">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+  </nav>
+<main>
+  <section id="home">
+    <h1>Home</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quam erat, suscipit eu gravida a, mollis et lectus. Pellentesque molestie est id mi dictum interdum. Maecenas eu quam a massa pharetra luctus. Aliquam tempus eu leo a tempor. Nam dapibus eu sem vel posuere. Aliquam ex ex, interdum eu sollicitudin ac, blandit quis tortor. Etiam non leo nunc. Mauris a arcu ac eros dictum dictum ut ut purus. Praesent quis lorem vitae felis pulvinar feugiat. Donec vitae iaculis metus, in pretium purus.</p>
+    <p>Aliquam eros elit, elementum sed diam vel, lacinia cursus dolor. Suspendisse volutpat dictum odio, eu feugiat elit scelerisque sit amet. Mauris blandit laoreet turpis, sed luctus elit tincidunt sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ante urna, elementum quis lectus sit amet, pulvinar varius arcu. Mauris tempor tincidunt enim, vel ornare sem bibendum nec. Aliquam dictum eu metus et pretium.</p>
+  </section>
+  <section id="about">
+    <h1>About Us</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quam erat, suscipit eu gravida a, mollis et lectus. Pellentesque molestie est id mi dictum interdum. Maecenas eu quam a massa pharetra luctus. Aliquam tempus eu leo a tempor. Nam dapibus eu sem vel posuere. Aliquam ex ex, interdum eu sollicitudin ac, blandit quis tortor. Etiam non leo nunc. Mauris a arcu ac eros dictum dictum ut ut purus. Praesent quis lorem vitae felis pulvinar feugiat. Donec vitae iaculis metus, in pretium purus.</p>
+    <p>Aliquam eros elit, elementum sed diam vel, lacinia cursus dolor. Suspendisse volutpat dictum odio, eu feugiat elit scelerisque sit amet. Mauris blandit laoreet turpis, sed luctus elit tincidunt sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ante urna, elementum quis lectus sit amet, pulvinar varius arcu. Mauris tempor tincidunt enim, vel ornare sem bibendum nec. Aliquam dictum eu metus et pretium.</p>
+  </section>
+  <section id="services">
+    <h1>Our Services</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quam erat, suscipit eu gravida a, mollis et lectus. Pellentesque molestie est id mi dictum interdum. Maecenas eu quam a massa pharetra luctus. Aliquam tempus eu leo a tempor. Nam dapibus eu sem vel posuere. Aliquam ex ex, interdum eu sollicitudin ac, blandit quis tortor. Etiam non leo nunc. Mauris a arcu ac eros dictum dictum ut ut purus. Praesent quis lorem vitae felis pulvinar feugiat. Donec vitae iaculis metus, in pretium purus.</p>
+    <p>Aliquam eros elit, elementum sed diam vel, lacinia cursus dolor. Suspendisse volutpat dictum odio, eu feugiat elit scelerisque sit amet. Mauris blandit laoreet turpis, sed luctus elit tincidunt sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ante urna, elementum quis lectus sit amet, pulvinar varius arcu. Mauris tempor tincidunt enim, vel ornare sem bibendum nec. Aliquam dictum eu metus et pretium.</p>
+  </section>
+  <section id="contact">
+    <h1>Contact Us</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quam erat, suscipit eu gravida a, mollis et lectus. Pellentesque molestie est id mi dictum interdum. Maecenas eu quam a massa pharetra luctus. Aliquam tempus eu leo a tempor. Nam dapibus eu sem vel posuere. Aliquam ex ex, interdum eu sollicitudin ac, blandit quis tortor. Etiam non leo nunc. Mauris a arcu ac eros dictum dictum ut ut purus. Praesent quis lorem vitae felis pulvinar feugiat. Donec vitae iaculis metus, in pretium purus.</p>
+  </section>
+</main>
+  <script>
+    window.addEventListener('scroll', function () {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 100) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 60;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
