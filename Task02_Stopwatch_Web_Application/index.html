@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Stopwatch</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Stopwatch</h1>
+            <div class="shortcut-info">
+                <i class="fa-solid fa-circle-question"></i>
+                <span class="tooltip">Space = Start/Pause<br>R = Reset<br>F = Flag<br>S = Save</span>
+            </div>
+        </div>
+
+        <div class="watch">
+            <span class="time">00:00:00.00</span>
+            <div class="controls">
+                <button class="reset"><i class="fa-solid fa-rotate-left"></i></button>
+                <button class="play"><i class="fa-solid fa-play"></i></button>
+                <button class="lap"><i class="fa-solid fa-flag"></i></button>
+            </div>
+        </div>
+
+        <div class="laps">
+            <div class="option">
+                <h2>Laps</h2>
+                <button class="save"><i class="fa-solid fa-download"></i>Save</button>
+            </div>
+            <hr/>
+            <div class="lap-list">
+                <p id="lap">No lap times recorded</p>
+            </div>
+            <hr/>
+        </div>
+    </div>
+
+    <div class="modal" id="saveModal">
+        <div class="modal-content">
+            <h3>Select Download file type</h3>
+            <div class="format-options">
+                <label>
+                    <input type="radio" name="fileFormat" value="txt" checked>
+                    TXT
+                </label>
+                <label>
+                    <input type="radio" name="fileFormat" value="csv">
+                    Excel (CSV)
+                </label>
+                <label>
+                    <input type="radio" name="fileFormat" value="pdf">
+                    PDF
+                </label>
+            </div>
+            <div class="modal-buttons">
+                <button class="cancelbtn" onclick="closeModal()">Cancel</button>
+                <button class="savebtn" onclick="saveSelectedFormat()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let startTime = 0;
+        let elapsedTime = 0;
+        let timerInterval;
+        let running = false;
+        let lapCount = 0;
+
+        const timeDisplay = document.querySelector(".time");
+        const playBtn = document.querySelector(".play i");
+        const resetBtn = document.querySelector(".reset");
+        const lapBtn = document.querySelector(".lap");
+        const saveBtn = document.querySelector(".save");
+        const lapContainer = document.querySelector(".lap-list");
+
+        function formatTime(ms) {
+            let milliseconds = parseInt((ms % 1000) / 10);
+            let seconds = Math.floor((ms / 1000) % 60);
+            let minutes = Math.floor((ms / (1000 * 60)) % 60);
+            let hours = Math.floor(ms / (1000 * 60 * 60));
+            return (
+                (hours < 10 ? "0" : "") + hours + ":" +
+                (minutes < 10 ? "0" : "") + minutes + ":" +
+                (seconds < 10 ? "0" : "") + seconds + "." +
+                (milliseconds < 10 ? "0" : "") + milliseconds
+            );
+        }
+
+        function startStop() {
+            if (!running) {
+                startTime = Date.now() - elapsedTime;
+                timerInterval = setInterval(() => {
+                    elapsedTime = Date.now() - startTime;
+                    timeDisplay.textContent = formatTime(elapsedTime);
+                }, 10);
+                playBtn.classList.replace("fa-play", "fa-pause");
+                running = true;
+            } else {
+                clearInterval(timerInterval);
+                playBtn.classList.replace("fa-pause", "fa-play");
+                running = false;
+            }
+        }
+
+        function resetWatch() {
+            clearInterval(timerInterval);
+            elapsedTime = 0;
+            lapCount = 0;
+            timeDisplay.textContent = "00:00:00.00";
+            playBtn.classList.replace("fa-pause", "fa-play");
+            running = false;
+            lapContainer.innerHTML = `<p id="lap">No lap times recorded</p>`;
+        }
+
+        function recordLap() {
+            if (!running) return;
+            const placeholder = document.getElementById("lap");
+            if (placeholder) placeholder.remove();
+            lapCount++;
+            const lapTime = formatTime(elapsedTime);
+            const lapItem = document.createElement("p");
+            lapItem.innerHTML = `<span class="lap-label">Lap ${lapCount}</span> <span class="lap-time">${lapTime}</span>`;
+            lapContainer.appendChild(lapItem);
+        }
+
+        function getLapData() {
+            return Array.from(document.querySelectorAll('.lap-list p'))
+                .map(lap => lap.innerText)
+                .filter(text => text !== "No lap times recorded");
+        }
+
+        function saveBlob(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function saveSelectedFormat() {
+            const laps = getLapData();
+            if (!laps.length) {
+                alert('No laps to save!');
+                return;
+            }
+            const format = document.querySelector('input[name="fileFormat"]:checked').value;
+
+            if (format === 'txt') {
+                const blob = new Blob([laps.join('\n')], { type: 'text/plain' });
+                saveBlob(blob, 'laps.txt');
+            } else if (format === 'csv') {
+                const blob = new Blob([laps.join('\n')], { type: 'text/csv' });
+                saveBlob(blob, 'laps.csv');
+            } else if (format === 'pdf') {
+                const doc = new jspdf.jsPDF();
+                laps.forEach((lap, i) => doc.text(lap, 10, 10 + i * 10));
+                doc.save('laps.pdf');
+            }
+            closeModal();
+        }
+
+        function openModal() {
+            document.getElementById('saveModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('saveModal').style.display = 'none';
+        }
+
+        // Event Listeners
+        playBtn.parentElement.addEventListener("click", startStop);
+        resetBtn.addEventListener("click", resetWatch);
+        lapBtn.addEventListener("click", recordLap);
+        saveBtn.addEventListener("click", openModal);
+
+        document.addEventListener("keydown", function (event) {
+            switch (event.code) {
+                case "Space": event.preventDefault(); startStop(); break;
+                case "KeyR": resetWatch(); break;
+                case "KeyF": recordLap(); break;
+                case "KeyS": openModal(); break;
+                case "KeyH":
+                    alert("Keyboard Shortcuts:\nSpace = Start/Pause\nR = Reset\nF = Flag\nS = Save");
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>
