@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Tic Tac Tie Game made by Thanus Thapasvi Thummala">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<title>Tic Tac Toe</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<h1>Tic Tac Toe</h1>
+			<hr />
+			<h3>Player <span class="turn">X</span> turn</h3>
+			<hr />
+		</div>
+		<div class="game">
+			<div class="box b1"></div>
+			<div class="box b2"></div>
+			<div class="box b3"></div>
+			<div class="box b4"></div>
+			<div class="box b5"></div>
+			<div class="box b6"></div>
+			<div class="box b7"></div>
+			<div class="box b8"></div>
+			<div class="box b9"></div>
+		</div>
+		<div class="bottom">
+			<h2 class="current-win">Player X Wins</h2>
+			<hr />
+			<div class="score">
+				<div class="wins">Player X : <span class="winx">0</span></div>
+				<div class="wins">Player O : <span class="wino">0</span></div>
+			</div>
+			<hr />
+			<button class="restart" aria-label="restart"><i class="fa-solid fa-rotate-left"></i>  Restart</button>
+		</div>
+	</div>
+	<script>
+	    const boxes = document.querySelectorAll(".box");
+	    const turnDisplay = document.querySelector(".turn");
+	    const currentWinDisplay = document.querySelector(".current-win");
+	    const winXDisplay = document.querySelector(".winx");
+	    const winODisplay = document.querySelector(".wino");
+	    const restartBtn = document.querySelector(".restart");
+
+	    let currentPlayer = "X";
+	    let gameActive = true;
+	    let board = ["", "", "", "", "", "", "", "", ""];
+	    let winX = 0, winO = 0;
+
+	    const winningCombos = [
+	        [0, 1, 2],
+	        [3, 4, 5],
+	        [6, 7, 8],
+	        [0, 3, 6],
+	        [1, 4, 7],
+	        [2, 5, 8],
+	        [0, 4, 8],
+	        [2, 4, 6]
+	    ];
+	    currentWinDisplay.style.display = "none";
+
+	    function updateTurnDisplay() {
+	        turnDisplay.textContent = currentPlayer;
+	        document.body.style.background = currentPlayer === "X"
+	            ? getComputedStyle(document.documentElement).getPropertyValue('--bg')
+	            : getComputedStyle(document.documentElement).getPropertyValue('--bg2');
+	    }
+
+	    function handleClick(e) {
+	        const index = Array.from(boxes).indexOf(e.target);
+
+	        if (board[index] !== "" || !gameActive) return;
+
+	        board[index] = currentPlayer;
+	        e.target.textContent = currentPlayer;
+	        e.target.style.color = currentPlayer === "X" ? "#ff4d4d" : "#4d79ff";
+
+	        if (checkWin()) {
+	            gameActive = false;
+	            showResult(`Player ${currentPlayer} Wins`, currentPlayer === "X" ? "#ff4d4d" : "#4d79ff");
+	            if (currentPlayer === "X") {
+	                winX++;
+	                winXDisplay.textContent = winX;
+	            } else {
+	                winO++;
+	                winODisplay.textContent = winO;
+	            }
+	        } else if (board.every(cell => cell !== "")) {
+	            gameActive = false;
+	            showResult("It's a Draw", "#ffaa00");
+	        } else {
+	            currentPlayer = currentPlayer === "X" ? "O" : "X";
+	            updateTurnDisplay();
+	        }
+	    }
+
+	    function checkWin() {
+	        return winningCombos.some(combo => combo.every(index => board[index] === currentPlayer));
+	    }
+
+	    function showResult(message, color) {
+	        currentWinDisplay.style.display = "block";
+	        currentWinDisplay.style.color = color;
+	        currentWinDisplay.textContent = message;
+	    }
+
+	    function resetBoard() {
+	        board.fill("");
+	        boxes.forEach(box => {
+	            box.textContent = "";
+	            box.style.color = "";
+	        });
+	        currentPlayer = "X";
+	        gameActive = true;
+	        currentWinDisplay.style.display = "none";
+	        updateTurnDisplay();
+	    }
+	    boxes.forEach(box => box.addEventListener("click", handleClick));
+	    restartBtn.addEventListener("click", resetBoard);
+	    updateTurnDisplay();
+	</script>
+</body>
+</html>

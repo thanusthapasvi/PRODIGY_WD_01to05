@@ -1,0 +1,153 @@
+:root {
+	--bg2: #121233;
+	--bg: #441212;
+	--container: #aa5555;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html, body {
+	width: 100%;
+	height: 100%;
+}
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--bg);
+}
+hr {
+	width: 100%;
+	margin: 8px;
+	border: 1px solid #222;
+}
+h1, h3, .wins, .box {
+	color: white;
+}
+h1, h2, h3 {
+	text-align: center;
+}
+h2 {
+	color: #23cc23;
+}
+.container {
+	width: 30%;
+	min-width: 350px;
+	max-width: 450px;
+	background: var(--container);
+	padding: 1rem;
+	border-radius: 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+}
+.header, .bottom, .score {
+	width: 100%;
+}
+.game {
+	margin: 1rem 0;
+	display: grid;
+	grid-template-columns: repeat(3, 100px);
+	grid-template-rows: repeat(3, 100px);
+	gap: 0.6rem;
+}
+.box {
+	background: #ccc;
+	border-radius: 8px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 4rem;
+	font-weight: bold;
+}
+.box:hover {
+	background: #aaa;
+}
+.bottom {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.score {
+	display: flex;
+	justify-content: space-between;
+}
+.wins {
+	font-size: 1.3rem;
+
+}
+.restart {
+	padding: 10px 16px;
+	border-radius: 8px;
+	border: none;
+	cursor: pointer;
+	font-size: 1rem;
+	color: white;
+	margin-top: 10px;
+	background: linear-gradient(120deg, #67bb67, #67aa67);
+}
+.restart:hover {
+	background: linear-gradient(120deg, #67aa67, #459945);
+}
+.restart:active {
+	transform: translate3d(-2px, 2px, 0px);
+}
+.restart i {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.restart:active i {
+    transform: rotate(-360deg);
+}
+
+@media (max-width: 1200px) {
+	.container {
+		width: 40%;
+	}
+}
+@media (max-width: 900px) {
+	.container {
+		width: 50%;
+	}
+}
+@media (max-width: 800px) {
+	.container {
+		width: 60%;
+	}
+}
+@media (max-width: 700px) {
+	.container {
+		width: 70%;
+	}
+	.game {
+		grid-template-columns: repeat(3, 95px);
+		grid-template-rows: repeat(3, 95px);
+	}
+}
+@media (max-width: 500px) {
+	.container {
+		width: 80%;
+	}
+	.game {
+		grid-template-columns: repeat(3, 90px);
+		grid-template-rows: repeat(3, 90px);
+	}
+}
+@media (max-width: 400px) {
+	.container {
+		width: 80%;
+	}
+	.game {
+		grid-template-columns: repeat(3, 85px);
+		grid-template-rows: repeat(3, 85px);
+	}
+
+	.restart {
+		padding: 8px 12px;
+	}
+}
