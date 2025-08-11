@@ -405,6 +405,9 @@ h2 {
 }
 
 @media (max-width: 800px) {
+	.title {
+		font-size: 2.6rem;
+	}
 	.top {
 		width: 60%;
 	}
@@ -457,6 +460,9 @@ h2 {
 }
 
 @media (max-width: 600px) {
+	.title {
+		font-size: 2.2rem;
+	}
 	.top {
 		width: 80%;
 	}
@@ -511,6 +517,9 @@ h2 {
 }
 
 @media (max-width: 480px) {
+	.title {
+		font-size: 2rem;
+	}
 	.top {
 		width: 85%;
 	}
