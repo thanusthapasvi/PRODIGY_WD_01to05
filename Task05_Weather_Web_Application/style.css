@@ -64,7 +64,6 @@ button:focus {
 .location,
 h1,
 h2,
-h3,
 i,
 p {
 	color: white;
@@ -72,6 +71,7 @@ p {
 
 h3 {
 	font-style: italic;
+	color: hsl(from var(--color-1) h calc(s + 30) calc(l + 30));
 }
 
 .search-city {
@@ -197,7 +197,6 @@ h3 {
 	border: 3px solid hsl(from var(--color-2) h s l);
 	box-shadow: 0 0 8px var(--color-2);
 	transition: transform 0.3s ease;
-	display: none;
 	animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -265,6 +264,9 @@ hr {
 	gap: 12px;
 	margin: 8px;
 }
+.other-info i, .forecast-info i {
+	color: hsl(from var(--color-1) h calc(s + 40) calc(l + 10));
+}
 
 .box {
 	width: 120px;
@@ -314,7 +316,6 @@ h2 {
 	border: 3px solid hsl(from var(--color-1) h calc(s + 20) l);
 	box-shadow: 0 0 8px hsl(from var(--color-1) h calc(s + 20) l);
 	gap: 12px;
-	display: none;
 	animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -340,12 +341,16 @@ h2 {
 	font-size: 1.2rem;
 }
 
-.box-top,
+.fore-top,
 .forecast-info,
 .tempe {
 	width: 100%;
 }
-
+.fore-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 .w {
 	width: 50px;
 	height: 50px;
@@ -516,7 +521,7 @@ h2 {
 	}
 }
 
-@media (max-width: 480px) {
+@media (max-width: 460px) {
 	.title {
 		font-size: 2rem;
 	}
@@ -531,18 +536,18 @@ h2 {
 	.forecast {
 		width: 60%;
 		flex-direction: column;
-		gap: 12px;
+		gap: 10px;
 	}
 
 	.fore {
 		width: 90%;
 		height: 220px;
-		padding: 12px;
+		padding: 10px;
 	}
 
 	.w {
-		width: 60px;
-		height: 60px;
+		width: 50px;
+		height: 50px;
 	}
 
 	.day {
@@ -550,7 +555,7 @@ h2 {
 	}
 
 	.forecast-info {
-		gap: 10px;
+		gap: 8px;
 		font-size: 1rem;
 	}
 
@@ -569,36 +574,6 @@ h2 {
 	.wind2,
 	.wind3,
 	.w-info {
-		font-size: 1rem;
-	}
-}
-
-@media (max-width: 420px) {
-	.weather {
-		padding: 10px;
-	}
-
-	.box {
-		width: 100px;
-		height: 60px;
-	}
-
-	.temp {
-		font-size: 2.2rem;
-	}
-
-	h3 {
-		font-size: 1rem;
-	}
-
-	.box-top {
-		font-size: 0.8rem;
-	}
-
-	.cur-humidity,
-	.cur-wind,
-	.cur-feel,
-	.cur-visibility {
 		font-size: 1rem;
 	}
 }
