@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Weather website made by Thanus Thapasvi Thummala">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Weather Site</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+	<h1 class="title">Weather Forecast</h1>
+	<div class="top">
+		<div class="search-container">
+			<input class="search-city" type="text" name="city" placeholder="Enter City Name...">
+			<button class="searchBtn" aria-label="search"><i class="fa fa-search"></i></button>
+		</div>
+		<div class="options">
+			<button aria-label="current location" class="location"><i class="fa fa-location-dot"></i> Current Location</button>
+			<label class="toggle-temp">
+			    <input type="checkbox" />
+			    <span class="slider">
+			    	<p class="C_F">°C  °F</p>
+			    </span>
+			</label>
+		</div>
+	</div>
+	<div class="weather">
+		<div class="info">
+			<div class="location-info">
+				<p class="city-name">City, India</p>
+				<p class="date">Monaday, August 11, 2025</p>
+			</div>
+			<img src="" alt="current weather" class="cur-weather">
+		</div>
+		<hr />
+		<div class="weather-info">
+			<div class="temp-info">
+				<h1 class="temp">29.9°C</h1>
+				<h3 class="weather-type">Cloudy</h3>
+			</div>
+			<div class="other-info">
+				<div class="box">
+					<div class="box-top">
+						<i class="fa fa-droplet"></i>
+						<h3>Humidity</h3>
+					</div>
+					<h2 class="cur-humidity">50%</h2>
+				</div>
+				<div class="box">
+					<div class="box-top">
+						<i class="fa fa-wind"></i>
+						<h3>Wind</h3>
+					</div>
+					<h2 class="cur-wind">12 Km/h</h2>
+				</div>
+				<div class="box">
+					<div class="box-top">
+						<i class="fa fa-thermometer-quarter"></i>
+						<h3>Feels Like</h3>
+					</div>
+					<h2 class="cur-feel">32°C</h2>
+				</div>
+				<div class="box">
+					<div class="box-top">
+						<i class="fa fa-eye"></i>
+						<h3>visibility</h3>
+					</div>
+					<h2 class="cur-visibility">50%</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="forecast">
+		<div class="fore">
+			<p class="day">Monday</p>
+			<hr />
+			<div class="box-top">
+				<div class="in">
+					<h1 class="temp1">32°C</h1>
+					<p class="w-info">Sunny</p>
+				</div>
+				<img src="" alt="weather" class="weather1 w">
+			</div>
+			<div class="forecast-info">
+				<div class="tempe">
+					<i class="fa fa-thermometer-quarter"></i>
+					<p class="high-temp">High: 36°C</p>
+					<p class="low-temp">Low: 30°C</p>
+				</div>
+				<div class="humid">
+					<i class="fa fa-droplet"></i>
+					<p class="humid1">Humidity: 60%</p>
+				</div>
+				<div class="wind">
+					<i class="fa fa-wind"></i>
+						<p class="wind1">Wind: 10 Km/h</p>
+				</div>
+			</div>
+		</div>
+		<div class="fore">
+			<p class="day">Tuesday</p>
+			<hr />
+			<div class="box-top">
+				<div class="in">
+					<h1 class="temp2">32°C</h1>
+					<p class="w-info">Sunny</p>
+				</div>
+				<img src="" alt="weather" class="weather2 w">
+			</div>
+			<div class="forecast-info">
+				<div class="tempe">
+					<i class="fa fa-thermometer-quarter"></i>
+					<p class="high-temp">High: 36°C</p>
+					<p class="low-temp">Low: 30°C</p>
+				</div>
+				<div class="humid">
+					<i class="fa fa-droplet"></i>
+					<p class="humid2">Humidity: 60%</p>
+				</div>
+				<div class="wind">
+					<i class="fa fa-wind"></i>
+					<p class="wind2">Wind: 10 Km/h</p>
+				</div>
+			</div>
+		</div>
+		<div class="fore">
+			<p class="day">Wednesday</p>
+			<hr />
+			<div class="box-top">
+				<div class="in">
+					<h1 class="temp3">32°C</h1>
+					<p class="w-info">Sunny</p>
+				</div>
+				<img src="" alt="weather" class="weather3 w">
+			</div>
+			<div class="forecast-info">
+				<div class="tempe">
+					<i class="fa fa-thermometer-quarter"></i>
+					<p class="high-temp">High: 36°C</p>
+					<p class="low-temp">Low: 30°C</p>
+				</div>
+				<div class="humid">
+					<i class="fa fa-droplet"></i>
+					<p class="humid3">Humidity: 60%</p>
+				</div>
+				<div class="wind">
+					<i class="fa fa-wind"></i>
+					<p class="wind3">Wind: 10 Km/h</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		const key1 = "51108";
+		const key2 = "24182";
+	    
+	    const searchBtn = document.querySelector(".searchBtn");
+	    const searchInput = document.querySelector(".search-city");
+	    const locationBtn = document.querySelector(".location");
+	    const weatherDiv = document.querySelector(".weather");
+	    const key3 = "b6182f7";
+		const key4 = "42064b4";
+		const key5 = "2e7e35";
+	    const forecastDiv = document.querySelector(".forecast");
+	    const tempToggle = document.querySelector(".toggle-temp input");
+	    let isCelsius = true;
+	    let weatherData = null;
+	    const apiKey = key5 + key4 + key3 + key2 + key1;
+	    async function fetchWeatherByCity(city) {
+	        try {
+	            const res = await fetch(
+	                `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=3&aqi=no&alerts=no`
+	            );
+	            if (!res.ok) throw new Error("City not found");
+	            const data = await res.json();
+	            weatherData = data;
+	            renderWeather();
+	        } catch (error) {
+	            alert(error.message);
+	        }
+	    }
+
+	    async function fetchWeatherByLocation(lat, lon) {
+	        try {
+	            const res = await fetch(
+	                `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${lon}&days=3&aqi=no&alerts=no`
+	            );
+	            if (!res.ok) throw new Error("Unable to fetch location weather");
+	            const data = await res.json();
+	            weatherData = data;
+	            renderWeather();
+	        } catch (error) {
+	            alert(error.message);
+	        }
+	    }
+
+	    function renderWeather() {
+	        if (!weatherData) return;
+
+	        document.querySelector(".city-name").textContent =
+	            `${weatherData.location.name}, ${weatherData.location.country}`;
+	        document.querySelector(".date").textContent =
+	            new Date(weatherData.location.localtime).toLocaleDateString("en-US", {
+	                weekday: "long",
+	                month: "long",
+	                day: "numeric",
+	                year: "numeric"
+	            });
+
+	        document.querySelector(".cur-weather").src = `https:${weatherData.current.condition.icon}`;
+	        document.querySelector(".weather-type").textContent = weatherData.current.condition.text;
+
+	        document.querySelector(".cur-humidity").textContent = `${weatherData.current.humidity}%`;
+	        document.querySelector(".cur-wind").textContent = `${weatherData.current.wind_kph} km/h`;
+	        document.querySelector(".cur-feel").textContent = `${weatherData.current.feelslike_c}°C`;
+	        document.querySelector(".cur-visibility").textContent = `${weatherData.current.vis_km} km`;
+
+	        updateTemperature();
+
+	        weatherDiv.style.display = "block";
+
+	        const forecastDays = weatherData.forecast.forecastday;
+	        forecastDays.forEach((dayData, index) => {
+	            const dayName = new Date(dayData.date).toLocaleDateString("en-US", { weekday: "long" });
+	            const conditionText = dayData.day.condition.text;
+	            const icon = `https:${dayData.day.condition.icon}`;
+
+	            document.querySelectorAll(".day")[index].textContent = dayName;
+	            document.querySelectorAll(".w-info")[index].textContent = conditionText;
+	            document.querySelector(`.weather${index+1}`).src = icon;
+	            document.querySelectorAll(`.humid${index+1}`)[0].textContent = `Humidity: ${dayData.day.avghumidity}%`;
+	            document.querySelectorAll(`.wind${index+1}`)[0].textContent = `Wind: ${dayData.day.maxwind_kph} km/h`;
+	        });
+
+	        updateForecastTemperatures();
+
+	        forecastDiv.style.display = "flex";
+	    }
+
+	    function updateTemperature() {
+	        if (!weatherData) return;
+	        const tempElement = document.querySelector(".temp");
+	        const feelsLikeElement = document.querySelector(".cur-feel");
+
+	        if (isCelsius) {
+	            tempElement.textContent = `${weatherData.current.temp_c}°C`;
+	            feelsLikeElement.textContent = `${weatherData.current.feelslike_c}°C`;
+	        } else {
+	            tempElement.textContent = `${weatherData.current.temp_f}°F`;
+	            feelsLikeElement.textContent = `${weatherData.current.feelslike_f}°F`;
+	        }
+	    }
+
+	    function updateForecastTemperatures() {
+	        if (!weatherData) return;
+	        const forecastDays = weatherData.forecast.forecastday;
+
+	        forecastDays.forEach((dayData, index) => {
+	            const tempElement = document.querySelector(`.temp${index+1}`);
+	            const highTempElement = document.querySelectorAll(".high-temp")[index];
+	            const lowTempElement = document.querySelectorAll(".low-temp")[index];
+
+	            if (isCelsius) {
+	                tempElement.textContent = `${dayData.day.maxtemp_c}°C`;
+	                highTempElement.textContent = `High: ${dayData.day.maxtemp_c}°C`;
+	                lowTempElement.textContent = `Low: ${dayData.day.mintemp_c}°C`;
+	            } else {
+	                tempElement.textContent = `${dayData.day.maxtemp_f}°F`;
+	                highTempElement.textContent = `High: ${dayData.day.maxtemp_f}°F`;
+	                lowTempElement.textContent = `Low: ${dayData.day.mintemp_f}°F`;
+	            }
+	        });
+	    }
+
+	    searchBtn.addEventListener("click", () => {
+	        const city = searchInput.value.trim();
+	        if (city) fetchWeatherByCity(city);
+	    });
+
+	    searchInput.addEventListener("keyup", (e) => {
+	        if (e.key === "Enter") {
+	            const city = searchInput.value.trim();
+	            if (city) fetchWeatherByCity(city);
+	        }
+	    });
+
+	    locationBtn.addEventListener("click", () => {
+	        if (navigator.geolocation) {
+	            navigator.geolocation.getCurrentPosition((pos) => {
+	                fetchWeatherByLocation(pos.coords.latitude, pos.coords.longitude);
+	            });
+	        } else {
+	            alert("Geolocation is not supported by your browser.");
+	        }
+	    });
+
+	    tempToggle.addEventListener("change", () => {
+	        isCelsius = !tempToggle.checked;
+	        updateTemperature();
+	        updateForecastTemperatures();
+	    });
+
+	    forecastDiv.style.display = "none";
+	</script>
+</body>
+</html>

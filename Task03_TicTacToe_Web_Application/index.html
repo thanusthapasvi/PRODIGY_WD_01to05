@@ -79,9 +79,11 @@
 	        e.target.textContent = currentPlayer;
 	        e.target.style.color = currentPlayer === "X" ? "#ff4d4d" : "#4d79ff";
 
-	        if (checkWin()) {
+	        const winCombo = checkWin();
+	        if (winCombo) {
 	            gameActive = false;
 	            showResult(`Player ${currentPlayer} Wins`, currentPlayer === "X" ? "#ff4d4d" : "#4d79ff");
+	            highlightWinningBoxes(winCombo);
 	            if (currentPlayer === "X") {
 	                winX++;
 	                winXDisplay.textContent = winX;
@@ -99,7 +101,18 @@
 	    }
 
 	    function checkWin() {
-	        return winningCombos.some(combo => combo.every(index => board[index] === currentPlayer));
+	        for (let combo of winningCombos) {
+	            if (combo.every(index => board[index] === currentPlayer)) {
+	                return combo;
+	            }
+	        }
+	        return null;
+	    }
+
+	    function highlightWinningBoxes(combo) {
+	        combo.forEach(index => {
+	            boxes[index].classList.add("win-highlight");
+	        });
 	    }
 
 	    function showResult(message, color) {
@@ -113,6 +126,7 @@
 	        boxes.forEach(box => {
 	            box.textContent = "";
 	            box.style.color = "";
+	            box.classList.remove("win-highlight");
 	        });
 	        currentPlayer = "X";
 	        gameActive = true;

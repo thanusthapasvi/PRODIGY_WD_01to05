@@ -1,0 +1,595 @@
+:root {
+	--bg: hsl(210, 100%, 10%);
+	--color-1: hsl(210, 30%, 60%);
+	--color-2: hsl(280, 100%, 60%);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	background: var(--bg);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.title {
+	font-size: 3rem;
+	margin-top: 2rem;
+}
+
+.top {
+	width: 40%;
+	min-width: 300px;
+	max-width: 500px;
+	height: 140px;
+	background: hsl(from var(--bg) h calc(s - 10) calc(l + 10));
+	padding: 16px 20px;
+	border-radius: 12px;
+	border-top: 4px solid hsl(from var(--bg) h s calc(l + 20));
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.search-container {
+	padding: 8px 12px 8px 0px;
+	position: relative;
+	width: 100%;
+	height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+}
+
+input:focus,
+button:focus {
+	outline: none;
+}
+
+.search-city::placeholder,
+.location,
+h1,
+h2,
+h3,
+i,
+p {
+	color: white;
+}
+
+h3 {
+	font-style: italic;
+}
+
+.search-city {
+	width: 95%;
+	border-radius: 32px;
+	border: none;
+	background: linear-gradient(45deg, hsl(from var(--color-1) h calc(s + 60) calc(l - 10)), var(--color-1));
+	padding: 8px 12px;
+	font-size: 1.2rem;
+}
+
+.search-city:hover {
+	box-shadow: 0 0 12px var(--color-2);
+}
+
+.searchBtn {
+	position: absolute;
+	right: 0px;
+	width: 60px;
+	height: 60px;
+	font-size: 1.5rem;
+	border-radius: 50%;
+	background: linear-gradient(90deg, var(--color-1), var(--color-2));
+	border: 5px solid hsl(from var(--bg) h calc(s - 20) calc(l + 10));
+	cursor: pointer;
+	z-index: 10;
+}
+
+.options {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.searchBtn:hover {
+	background: linear-gradient(90deg, hsl(from var(--color-1) h s calc(l - 10)), hsl(from var(--color-2) h s l));
+	border: 5px solid hsl(from var(--bg) h calc(s + 20) calc(l + 20));
+}
+
+.searchBtn:active {
+	border: 5px solid var(--color-2);
+	box-shadow: 0 0 12px var(--color-2);
+}
+
+.location {
+	font-size: 1.2rem;
+	border-radius: 8px 0 8px 0;
+	padding: 8px 12px;
+	cursor: pointer;
+	border: none;
+	border-left: 4px solid var(--color-1);
+	border-bottom: 4px solid var(--color-1);
+	background: hsl(from var(--color-2) h s calc(l - 20));
+	transition: border 0.3s ease;
+}
+
+.location:hover {
+	background: hsl(from var(--color-2) h s calc(l - 10));
+}
+
+.location:active {
+	border: none;
+}
+
+.toggle-temp {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 30px;
+}
+
+.toggle-temp input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	background: hsl(from var(--color-1) h calc(s + 30) l);
+	border-radius: 24px;
+	width: 100%;
+	height: 100%;
+	transition: background 0.3s;
+}
+
+.C_F {
+	margin-top: 5px;
+	text-align: center;
+	font-size: 20px;
+	color: black;
+}
+
+.slider::before {
+	content: "";
+	position: absolute;
+	height: 24px;
+	width: 24px;
+	left: 4px;
+	bottom: 3px;
+	background: hsl(from var(--color-2) h calc(s + 10) calc(l - 10));
+	border-radius: 50%;
+	transition: transform 0.3s;
+}
+
+.toggle-temp input:checked+.slider {
+	background: hsl(from var(--color-2) h calc(s - 10) calc(l + 10));
+}
+
+.toggle-temp input:checked+.slider::before {
+	transform: translateX(28px);
+}
+
+.weather {
+	width: 50%;
+	min-width: 380px;
+	padding: 16px;
+	border-radius: 12px;
+	background: hsl(from var(--bg) h calc(s - 10) calc(l + 10));
+	border: 3px solid hsl(from var(--color-2) h s l);
+	box-shadow: 0 0 8px var(--color-2);
+	transition: transform 0.3s ease;
+	display: none;
+	animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.weather:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 0 16px var(--color-2);
+}
+
+hr {
+	margin: 4px 0;
+	border: 1px solid white;
+}
+
+.info,
+.weather-info {
+	width: 100%;
+}
+
+.info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.location-info {
+	font-size: 1.3rem;
+}
+
+.cur-weather {
+	width: 80px;
+	height: 80px;
+}
+
+.city-name {
+	font-size: 1.5rem;
+}
+
+.date {
+	font-size: 1.2rem;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.weather-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.other-info {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	gap: 12px;
+	margin: 8px;
+}
+
+.box {
+	width: 120px;
+	height: 80px;
+	background: rgba(0, 0, 0, 0.2);
+	padding: 8px;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.box-top {
+	display: flex;
+	align-items: center;
+	font-size: 1rem;
+	gap: 6px;
+}
+
+h2 {
+	font-size: 1.5rem;
+}
+
+.temp {
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+.weather-type {
+	font-size: 1.5rem;
+}
+
+.cur-humidity,
+.cur-wind,
+.cur-feel,
+.cur-visibility {
+	font-size: 1.5rem;
+}
+
+.forecast {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 16px;
+	border-radius: 12px;
+	background: hsl(from var(--bg) h calc(s - 10) calc(l + 10));
+	border: 3px solid hsl(from var(--color-1) h calc(s + 20) l);
+	box-shadow: 0 0 8px hsl(from var(--color-1) h calc(s + 20) l);
+	gap: 12px;
+	display: none;
+	animation: fadeIn 0.5s ease-in-out;
+}
+
+.forecast:hover {
+	box-shadow: 0 0 16px hsl(from var(--color-1) h calc(s + 20) l);
+
+}
+
+.fore {
+	position: relative;
+	width: 220px;
+	height: 220px;
+	background: hsl(from var(--bg) h calc(s - 10) calc(l + 20));
+	padding: 12px;
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.day {
+	text-align: center;
+	font-size: 1.2rem;
+}
+
+.box-top,
+.forecast-info,
+.tempe {
+	width: 100%;
+}
+
+.w {
+	width: 50px;
+	height: 50px;
+}
+
+.forecast-info {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.tempe {
+	display: flex;
+	gap: 6px;
+}
+
+.temp1,
+.temp2,
+.temp3 {
+	font-size: 2rem;
+}
+
+.humid1,
+.humid2,
+.humid3,
+.low-temp,
+.high-temp,
+.wind1,
+.wind2,
+.wind3,
+.w-info {
+	font-size: 1rem;
+}
+
+.w-info {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.humid {
+	display: flex;
+	gap: 12px;
+}
+
+.wind {
+	display: flex;
+	gap: 12px;
+}
+
+@media (max-width: 1000px) {
+	.top {
+		width: 50%;
+	}
+
+	.weather {
+		width: 60%;
+	}
+}
+
+@media (max-width: 800px) {
+	.top {
+		width: 60%;
+	}
+
+	.weather {
+		width: 70%;
+	}
+
+	.forecast {
+		gap: 10px;
+	}
+
+	.fore {
+		width: 180px;
+		height: 180px;
+		padding: 8px;
+	}
+
+	.w {
+		width: 45px;
+		height: 45px;
+	}
+
+	.day {
+		font-size: 1rem;
+	}
+
+	.forecast-info {
+		gap: 6px;
+		font-size: 0.8rem;
+	}
+
+	.temp1,
+	.temp2,
+	.temp3 {
+		font-size: 1.8rem;
+	}
+
+	.humid1,
+	.humid2,
+	.humid3,
+	.low-temp,
+	.high-temp,
+	.wind1,
+	.wind2,
+	.wind3,
+	.w-info {
+		font-size: 0.8rem;
+	}
+}
+
+@media (max-width: 600px) {
+	.top {
+		width: 80%;
+	}
+
+	.weather {
+		width: 90%;
+	}
+
+	.forecast {
+		width: 55%;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.fore {
+		width: 90%;
+		height: 200px;
+		padding: 10px;
+	}
+
+	.w {
+		width: 50px;
+		height: 50px;
+	}
+
+	.day {
+		font-size: 1rem;
+	}
+
+	.forecast-info {
+		gap: 8px;
+		font-size: 1rem;
+	}
+
+	.temp1,
+	.temp2,
+	.temp3 {
+		font-size: 2rem;
+	}
+
+	.humid1,
+	.humid2,
+	.humid3,
+	.low-temp,
+	.high-temp,
+	.wind1,
+	.wind2,
+	.wind3,
+	.w-info {
+		font-size: 1rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.top {
+		width: 85%;
+	}
+
+	.weather {
+		width: 95%;
+	}
+
+	.forecast {
+		width: 60%;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.fore {
+		width: 90%;
+		height: 220px;
+		padding: 12px;
+	}
+
+	.w {
+		width: 60px;
+		height: 60px;
+	}
+
+	.day {
+		font-size: 1rem;
+	}
+
+	.forecast-info {
+		gap: 10px;
+		font-size: 1rem;
+	}
+
+	.temp1,
+	.temp2,
+	.temp3 {
+		font-size: 2rem;
+	}
+
+	.humid1,
+	.humid2,
+	.humid3,
+	.low-temp,
+	.high-temp,
+	.wind1,
+	.wind2,
+	.wind3,
+	.w-info {
+		font-size: 1rem;
+	}
+}
+
+@media (max-width: 420px) {
+	.weather {
+		padding: 10px;
+	}
+
+	.box {
+		width: 100px;
+		height: 60px;
+	}
+
+	.temp {
+		font-size: 2.2rem;
+	}
+
+	h3 {
+		font-size: 1rem;
+	}
+
+	.box-top {
+		font-size: 0.8rem;
+	}
+
+	.cur-humidity,
+	.cur-wind,
+	.cur-feel,
+	.cur-visibility {
+		font-size: 1rem;
+	}
+}

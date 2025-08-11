@@ -76,6 +76,27 @@ h2 {
 	display: flex;
 	justify-content: space-between;
 }
+.current-win {
+	background: rgba(0, 0, 0, 0.5);
+	padding: 4px 8px;
+	animation: coming 1s ease-in-out 1, blink 0.4s ease infinite;
+}
+@keyframes coming {
+	0% {
+		transform: translateX(300%) scaleX(6);
+	}
+	100% {
+		transform: translateX(0px) scaleX(1);
+	}
+}
+@keyframes blink {
+	0% {
+
+	}
+	100% {
+		color: white;
+	}
+}
 .wins {
 	font-size: 1.3rem;
 
@@ -103,6 +124,11 @@ h2 {
 
 .restart:active i {
     transform: rotate(-360deg);
+}
+
+.win-highlight {
+	background-color: #4CAA50 !important;
+	color: white !important;
 }
 
 @media (max-width: 1200px) {
