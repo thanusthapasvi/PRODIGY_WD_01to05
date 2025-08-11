@@ -198,6 +198,7 @@ h3 {
 	box-shadow: 0 0 8px var(--color-2);
 	transition: transform 0.3s ease;
 	animation: fadeIn 0.5s ease-in-out;
+	display: none;
 }
 
 @keyframes fadeIn {
@@ -317,6 +318,7 @@ h2 {
 	box-shadow: 0 0 8px hsl(from var(--color-1) h calc(s + 20) l);
 	gap: 12px;
 	animation: fadeIn 0.5s ease-in-out;
+	display: none;
 }
 
 .forecast:hover {
