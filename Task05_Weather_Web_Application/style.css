@@ -107,10 +107,11 @@ h3 {
 	align-items: center;
 	justify-content: space-between;
 }
-
-.searchBtn:hover {
-	background: linear-gradient(90deg, hsl(from var(--color-1) h s calc(l - 10)), hsl(from var(--color-2) h s l));
-	border: 5px solid hsl(from var(--bg) h calc(s + 20) calc(l + 20));
+@media (hover: hover) and (pointer: fine) {
+    .searchBtn:hover {
+        background: linear-gradient(90deg, hsl(from var(--color-1) h s calc(l - 10)), hsl(from var(--color-2) h s l));
+        border: 5px solid hsl(from var(--bg) h calc(s + 20) calc(l + 20));
+    }
 }
 
 .searchBtn:active {
@@ -319,6 +320,7 @@ h2 {
 	gap: 12px;
 	animation: fadeIn 0.5s ease-in-out;
 	display: none;
+	margin-bottom: 12px;
 }
 
 .forecast:hover {
