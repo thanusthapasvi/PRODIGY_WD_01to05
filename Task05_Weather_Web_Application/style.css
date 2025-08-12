@@ -33,7 +33,7 @@ body {
 
 .top {
 	width: 40%;
-	min-width: 300px;
+	min-width: 320px;
 	max-width: 500px;
 	height: 140px;
 	background: hsl(from var(--bg) h calc(s - 10) calc(l + 10));
@@ -190,7 +190,7 @@ h3 {
 
 .weather {
 	width: 50%;
-	min-width: 380px;
+	min-width: 320px;
 	padding: 16px;
 	border-radius: 12px;
 	background: hsl(from var(--bg) h calc(s - 10) calc(l + 10));
@@ -308,10 +308,9 @@ h2 {
 }
 
 .forecast {
-	min-width: 280px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	min-width: 320px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	padding: 16px;
 	border-radius: 12px;
 	background: hsl(from var(--bg) h calc(s - 10) calc(l + 10));
@@ -425,45 +424,9 @@ h2 {
 	}
 
 	.forecast {
-		gap: 10px;
-	}
-
-	.fore {
-		width: 180px;
-		height: 180px;
-		padding: 8px;
-	}
-
-	.w {
-		width: 45px;
-		height: 45px;
-	}
-
-	.day {
-		font-size: 1rem;
-	}
-
-	.forecast-info {
-		gap: 6px;
-		font-size: 0.8rem;
-	}
-
-	.temp1,
-	.temp2,
-	.temp3 {
-		font-size: 1.8rem;
-	}
-
-	.humid1,
-	.humid2,
-	.humid3,
-	.low-temp,
-	.high-temp,
-	.wind1,
-	.wind2,
-	.wind3,
-	.w-info {
-		font-size: 0.8rem;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+		gap: 16px;
 	}
 }
 
@@ -475,11 +438,14 @@ h2 {
 		width: 80%;
 	}
 
-	.weather {
-		width: 90%;
+	.weather, .forecast {
+		width: 80%;
 	}
 	.temp {
 		font-size: 2.2rem;
+	}
+	.weather-type {
+		font-size: 1.3rem;
 	}
 	.cur-humidity,
 	.cur-wind,
@@ -488,66 +454,40 @@ h2 {
 		font-size: 1.3rem;
 	}
 	.forecast {
-		width: 55%;
-		flex-direction: column;
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(3, 1fr);
 		gap: 12px;
 	}
-
 	.fore {
-		width: 90%;
-		height: 200px;
-		padding: 10px;
-	}
-
-	.w {
-		width: 50px;
-		height: 50px;
-	}
-
-	.day {
-		font-size: 1rem;
-	}
-
-	.forecast-info {
-		gap: 8px;
-		font-size: 1rem;
-	}
-
-	.temp1,
-	.temp2,
-	.temp3 {
-		font-size: 2rem;
-	}
-
-	.humid1,
-	.humid2,
-	.humid3,
-	.low-temp,
-	.high-temp,
-	.wind1,
-	.wind2,
-	.wind3,
-	.w-info {
-		font-size: 1rem;
+		width: 70%;
+		margin: 0 auto;
 	}
 }
 
-@media (max-width: 460px) {
+@media (max-width: 480px) {
 	.title {
 		font-size: 2rem;
 	}
+	.city-name {
+		font-size: 1.3rem;
+	}
+	.date {
+		font-size: 1rem;
+	}
 	.top {
-		width: 85%;
+		width: 80%;
 	}
 	.temp {
-		font-size: 2rem;
+		font-size: 1.8rem;
 	}
-
-	.weather {
-		width: 90%;
+	.weather-type {
+		font-size: 1.2rem;
+	}
+	.weather, .forecast {
+		width: 80%;
 	}
 	.box {
-		width: 100px;
+		width: 90px;
 		height: 70px;
 	}
 	.box-top {
@@ -560,39 +500,39 @@ h2 {
 		font-size: 1.1rem;
 	}
 	h3 {
-		font-size: 1rem;
+		font-size: 0.8rem;
 	}
 	.forecast {
-		width: 70%;
-		flex-direction: column;
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(3, 1fr);
 		gap: 10px;
 	}
 
 	.fore {
-		width: 90%;
-		height: 220px;
-		padding: 10px;
+		width: 80%;
+		height: auto;
+		padding: 12px;
+		margin: 0 auto;
 	}
 
-
 	.w {
-		width: 50px;
-		height: 50px;
+		width: 55px;
+		height: 55px;
 	}
 
 	.day {
-		font-size: 1rem;
+		font-size: 1.2rem;
 	}
 
 	.forecast-info {
 		gap: 8px;
-		font-size: 1rem;
+		font-size: 1.2rem;
 	}
 
 	.temp1,
 	.temp2,
 	.temp3 {
-		font-size: 2rem;
+		font-size: 2.2rem;
 	}
 
 	.humid1,
@@ -604,6 +544,6 @@ h2 {
 	.wind2,
 	.wind3,
 	.w-info {
-		font-size: 1rem;
+		font-size: 1.2rem;
 	}
 }
